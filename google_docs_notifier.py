@@ -1,8 +1,14 @@
 import gdata.docs.service
+import getpass
 
-#get a particular shared document
+client = gdata.docs.service.DocsService()
 
-#get read the datas 
+email = raw_input('Enter your email :')
+password = getpass.getpass('Enter your password :')
 
-#if it got any change compared to the previous one send an email
+client.ClientLogin(email, password)
 
+documents_feed = client.GetDocumentListFeed()
+
+for documents in documents_feed.entry:
+	print documents.title.text
